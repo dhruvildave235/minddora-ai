@@ -48,7 +48,7 @@ Under the hood, it's not a thin wrapper around an API — it's a genuinely engin
        │
        ▼
  ┌─────────────────────────────────────────────┐
- │              Ask a question                   │
+ │              Ask a question                 │
  └─────────────────────────────────────────────┘
        │
        ▼
