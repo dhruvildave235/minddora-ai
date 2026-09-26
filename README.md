@@ -88,7 +88,7 @@ pip install -r requirements.txt
 
 ```bash
 psql -U postgres -c "CREATE DATABASE minddora_db;"
-psql -U postgres -c "CREATE USER minddora_user WITH PASSWORD 'minddora_pass';"
+psql -U postgres -c "CREATE USER minddora_user WITH PASSWORD 'pass';"
 psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE minddora_db TO minddora_user;"
 ```
 
