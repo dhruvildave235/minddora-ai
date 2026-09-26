@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Too Many Requests — Minddora AI{% endblock %}
+{% block content %}
+<div class="auth-page" style="text-align: center;">
+    <div>
+        <h1 class="hero-title text-neon" style="font-size: 6rem;">429</h1>
+        <h2 class="mt-lg">Slow down a little.</h2>
+        <p class="hero-subtitle mt-lg" style="margin: var(--space-lg) auto;">
+            Too many requests in a short time. Please wait a minute and try again.
+        </p>
+        <a href="{{ url_for('landing.index') }}" class="btn btn-neon btn-large mt-lg">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Something Went Wrong — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<div class="auth-page" style="text-align: center;">
+    <div>
+        <h1 class="hero-title text-neon" style="font-size: 6rem;">500</h1>
+        <h2 class="mt-lg">Something went wrong on our end.</h2>
+        <p class="hero-subtitle mt-lg" style="margin: var(--space-lg) auto;">
+            We've logged the issue and our team will look into it. Please try again shortly.
+        </p>
+        <a href="{{ url_for('landing.index') }}" class="btn btn-neon btn-large mt-lg">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}Profile{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>Profile</h2>
+</div>
+
+<div class="glass-card" style="max-width: 560px;">
+    <div class="profile-avatar-row">
+        <div class="profile-avatar-placeholder">{{ user.full_name[0] | upper }}</div>
+        <div>
+            <h3>{{ user.full_name }}</h3>
+            <p>{{ user.email }}</p>
+        </div>
+    </div>
+
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Institution</span>
+        <span>{{ user.institution or "Not set" }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Field of Study</span>
+        <span>{{ user.field_of_study or "Not set" }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Email Verified</span>
+        <span>
+            <span class="status-badge {{ 'status-active' if user.is_email_verified else 'status-open' }}">
+                {{ "Verified" if user.is_email_verified else "Not Verified" }}
+            </span>
+            {% if not user.is_email_verified %}
+            <a href="{{ url_for('dashboard.resend_verification') }}" class="auth-link-small" style="margin-left: 8px;">Resend email</a>
+            {% endif %}
+        </span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Member Since</span>
+        <span>{{ user.created_at.strftime('%B %d, %Y') }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Storage Used</span>
+        <span>{{ (user.storage_used_bytes / 1048576) | round(1) }} MB / {{ (user.storage_quota_bytes / 1048576) | round(0) | int }} MB</span>
+    </div>
+
+    <!-- <a href="{{ url_for('dashboard.settings') }}" class="btn btn-neon mt-lg">Edit Profile in Settings</a> -->
+     <a href="{{ url_for('dashboard.settings') }}#edit-profile-form" class="btn btn-neon mt-lg">Edit Profile</a>
+</div>
+{% endblock %}  

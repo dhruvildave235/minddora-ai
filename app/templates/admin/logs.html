@@ -1,0 +1,53 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}System Logs{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>System Logs</h2>
+    <div class="admin-filter-group">
+        <select id="log-level-filter" class="glass-input">
+            <option value="">All Levels</option>
+            <option value="DEBUG">Debug</option>
+            <option value="INFO">Info</option>
+            <option value="WARNING">Warning</option>
+            <option value="ERROR">Error</option>
+            <option value="CRITICAL">Critical</option>
+        </select>
+        <select id="log-category-filter" class="glass-input">
+            <option value="">All Categories</option>
+            <option value="auth">Auth</option>
+            <option value="upload">Upload</option>
+            <option value="rag_pipeline">RAG Pipeline</option>
+            <option value="chat">Chat</option>
+            <option value="admin_action">Admin Action</option>
+            <option value="security">Security</option>
+            <option value="database">Database</option>
+            <option value="system">System</option>
+        </select>
+    </div>
+</div>
+
+<div class="glass-card admin-table-wrapper">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Category</th>
+                <th>Message</th>
+                <th>IP Address</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="logs-table-body">
+            <tr><td colspan="5" class="skeleton" style="height: 40px;"></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="logs-pagination" class="pagination-controls"></div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

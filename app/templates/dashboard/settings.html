@@ -1,0 +1,91 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}Settings{% endblock %}
+
+{% block dashboard_content %}
+<!-- <div class="admin-page-header">
+    <h2>Settings</h2>
+</div>
+
+<div class="glass-card" style="max-width: 560px;">
+    <h3>Change Password</h3> -->
+<!-- <div class="admin-page-header">
+    <h2>Settings</h2>
+</div>
+
+<div class="glass-card" style="max-width: 560px;">
+    <h3>Profile Details</h3> -->
+<div class="admin-page-header">
+    <h2>Settings</h2>
+</div>
+
+<div class="glass-card" style="max-width: 560px;">
+    <h3>AI Answer Mode</h3>
+    <p class="mt-lg" style="font-size: 0.85rem; color: var(--color-text-muted);">
+        Local uses only your notes with no external API. AI-Powered sends relevant excerpts from your notes to Google Gemini using your own free API key.
+    </p>
+
+    <div class="form-group mt-lg">
+        <label for="settings-ai-mode-select">Mode</label>
+        <select id="settings-ai-mode-select" class="glass-input">
+            <option value="local" {{ "selected" if current_user.ai_mode == "local" }}>Local (no AI, private)</option>
+            <option value="gemini" {{ "selected" if current_user.ai_mode == "gemini" }}>AI-Powered (Gemini)</option>
+        </select>
+    </div>
+
+    <div id="settings-gemini-fields" class="{{ '' if current_user.ai_mode == 'gemini' else 'hidden' }}">
+        <div class="form-group">
+            <label for="settings-gemini-key">Gemini API Key</label>
+            <input type="password" id="settings-gemini-key" class="glass-input"
+                   placeholder="{{ 'Key saved — enter a new one to replace it' if current_user.has_gemini_key else 'Paste your free key from ai.google.dev' }}">
+        </div>
+        <div class="form-group">
+            <label for="settings-gemini-model">Model Name</label>
+            <input type="text" id="settings-gemini-model" class="glass-input" value="{{ current_user.gemini_model_name or 'gemini-2.0-flash' }}">
+        </div>
+    </div>
+
+    <button id="settings-save-ai-mode-btn" class="btn btn-neon">Save AI Mode</button>
+</div>
+
+<div class="glass-card mt-lg" style="max-width: 560px;">
+    <h3>Profile Details</h3>
+    <form id="edit-profile-form" class="auth-form mt-lg">
+        <div class="form-group">
+            <label for="profile-full-name">Full Name</label>
+            <input type="text" id="profile-full-name" class="glass-input" value="{{ user.full_name }}">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-institution">Institution</label>
+            <input type="text" id="profile-institution" class="glass-input" value="{{ user.institution or '' }}" placeholder="e.g. LDRP Institute of Technology">
+        </div>
+
+        <div class="form-group">
+            <label for="profile-field-of-study">Field of Study</label>
+            <input type="text" id="profile-field-of-study" class="glass-input" value="{{ user.field_of_study or '' }}" placeholder="e.g. Computer Engineering">
+        </div>
+
+        <button type="submit" class="btn btn-neon auth-submit-btn">Save Profile</button>
+    </form>
+</div>
+
+<!-- Change Password card removed in the local edition — there is no
+     login system, so there is no password to change. -->
+
+<div class="glass-card mt-lg" style="max-width: 560px;">
+    <h3>Storage</h3>
+    <p class="mt-lg">
+        Using {{ (user.storage_used_bytes / 1048576) | round(2) }} MB of
+        {{ (user.storage_quota_bytes / 1048576) | round(0) | int }} MB available.
+    </p>
+    <div class="storage-bar-track mt-lg">
+        <div class="storage-bar-fill" style="width: {{ ((user.storage_used_bytes / user.storage_quota_bytes) * 100) | round(1) }}%;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

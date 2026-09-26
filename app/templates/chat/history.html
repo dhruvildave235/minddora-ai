@@ -1,0 +1,42 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}{{ "Saved Conversations" if bookmarked_only else "History" }}{% endblock %}
+{% block dashboard_extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>{{ "Saved Conversations" if bookmarked_only else "History" }}</h2>
+    <a href="{{ url_for('chat.chat_home') }}" class="btn btn-neon">+ New Conversation</a>
+</div>
+
+<div id="history-list" class="documents-grid" data-bookmarked-only="{{ bookmarked_only | tojson }}">
+    {% for session in sessions %}
+    <div class="glass-card document-card" data-session-id="{{ session.id }}">
+        <div class="document-card-icon">{{ "⭐" if session.is_bookmarked else "💬" }}</div>
+        <div class="document-card-title">{{ session.title }}</div>
+        <div class="document-card-meta">{{ session.messages.count() }} messages &middot; {{ session.updated_at.strftime('%b %d, %Y') }}</div>
+        <div class="document-card-actions">
+            <a href="{{ url_for('chat.chat_session', session_id=session.id) }}" class="btn btn-ghost btn-sm">Open</a>
+            <button class="btn btn-ghost btn-sm" onclick="toggleSessionBookmark({{ session.id }}, this)">
+                {{ "Unsave" if session.is_bookmarked else "Save" }}
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="deleteSession({{ session.id }})">Delete</button>
+        </div>
+    </div>
+    {% else %}
+    <p class="empty-state-text">
+        {% if bookmarked_only %}
+            No saved conversations yet. Star a conversation to save it here.
+        {% else %}
+            No conversations yet. <a href="{{ url_for('chat.chat_home') }}">Start chatting</a>.
+        {% endif %}
+    </p>
+    {% endfor %}
+</div>
+
+<div id="history-pagination" class="pagination-controls mt-lg"></div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

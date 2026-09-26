@@ -1,0 +1,37 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}Search Notes{% endblock %}
+{% block dashboard_extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>Search Notes</h2>
+</div>
+
+<div class="search-mode-toggle">
+    <button class="search-mode-btn active" data-mode="hybrid">Hybrid</button>
+    <button class="search-mode-btn" data-mode="semantic">Semantic</button>
+    <button class="search-mode-btn" data-mode="keyword">Keyword</button>
+</div>
+
+<div class="search-bar-row">
+    <input type="text" id="search-query-input" class="glass-input" placeholder="Search across all your notes...">
+    <button id="search-submit-btn" class="btn btn-neon">Search</button>
+</div>
+
+<div class="search-filters-row mt-lg">
+    <select id="search-subject-filter" class="glass-input">
+        <option value="">All Subjects</option>
+    </select>
+    <input type="date" id="search-date-from" class="glass-input" title="From date">
+    <input type="date" id="search-date-to" class="glass-input" title="To date">
+</div>
+
+<div id="search-results-container" class="mt-lg">
+    <p class="empty-state-text">Enter a search query above to find relevant sections in your notes.</p>
+</div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,144 @@
+/* ==========================================================================
+   landing.css
+   Styles specific to the public marketing pages: Landing, About,
+   Features, Pricing, Contact. Depends on tokens/components from
+   base.css and glassmorphism.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Particle Background Canvas
+   -------------------------------------------------------------------------- */
+.particle-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse at top, #0d1226 0%, var(--color-bg-primary) 70%);
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section
+   -------------------------------------------------------------------------- */
+.hero-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-lg);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-2xl);
+    align-items: center;
+    min-height: 80vh;
+}
+
+.hero-title {
+    margin-bottom: var(--space-lg);
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    max-width: 540px;
+    margin-bottom: var(--space-xl);
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   Chat Preview Card (hero visual mock)
+   -------------------------------------------------------------------------- */
+.chat-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    min-width: 320px;
+}
+
+.chat-bubble {
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.chat-bubble-user {
+    align-self: flex-end;
+    background: var(--color-accent-gradient);
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-bubble-ai {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--color-text-primary);
+    border-bottom-left-radius: 4px;
+}
+
+.citation-tag {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    border-radius: var(--radius-full);
+    background: rgba(34, 211, 238, 0.15);
+    color: var(--color-accent-cyan);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   Feature Preview Grid
+   -------------------------------------------------------------------------- */
+.features-preview {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-lg);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+}
+
+.feature-card {
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+}
+
+.feature-card h3 {
+    margin-bottom: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Overrides (mobile-first breakpoints defined in responsive.css;
+   these are landing-page-specific adjustments only)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: var(--space-xl);
+    }
+
+    .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .features-preview {
+        grid-template-columns: 1fr;
+    }
+}

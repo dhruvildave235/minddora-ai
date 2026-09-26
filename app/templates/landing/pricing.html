@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Pricing — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<!-- <nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo"><span class="logo-text">Minddora<span class="logo-accent">AI</span></span></a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('landing.features') }}">Features</a></li>
+            <li><a href="{{ url_for('landing.about') }}">About</a></li>
+            <li><a href="{{ url_for('landing.pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('landing.contact') }}">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">Sign In</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+        </div>
+    </div>
+</nav> -->
+
+{% include "landing/_nav.html" %}
+
+<section class="hero-section" style="grid-template-columns: 1fr; text-align: center; min-height: 30vh;">
+    <div class="hero-content" style="margin: 0 auto;">
+        <h1 class="hero-title">Simple, <span class="text-neon">Student-Friendly</span> Pricing</h1>
+    </div>
+</section>
+
+<section class="features-preview" style="grid-template-columns: repeat(2, 1fr); max-width: 900px;">
+    <div class="glass-card feature-card">
+        <h3>Free</h3>
+        <p class="hero-subtitle" style="font-size: 2rem; margin: var(--space-md) 0;">₹0<span style="font-size: 1rem;">/mo</span></p>
+        <p>50 MB storage &middot; Unlimited questions &middot; Hybrid search &middot; Basic analytics</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-ghost btn-large mt-lg" style="width: 100%;">Get Started</a>
+    </div>
+    <div class="glass-card feature-card neon-border glow-purple">
+        <h3>Student Pro</h3>
+        <p class="hero-subtitle text-neon" style="font-size: 2rem; margin: var(--space-md) 0;">Coming Soon</p>
+        <p>Expanded storage &middot; Priority processing &middot; Advanced analytics &middot; Early access to new features</p>
+        <button class="btn btn-neon btn-large mt-lg" style="width: 100%;" disabled>Notify Me</button>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}About — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<!-- <nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo"><span class="logo-text">Minddora<span class="logo-accent">AI</span></span></a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('landing.features') }}">Features</a></li>
+            <li><a href="{{ url_for('landing.about') }}">About</a></li>
+            <li><a href="{{ url_for('landing.pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('landing.contact') }}">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">Sign In</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+        </div>
+    </div>
+</nav> -->
+
+{% include "landing/_nav.html" %}
+
+<section class="hero-section" style="grid-template-columns: 1fr; text-align: center;">
+    <div class="hero-content" style="margin: 0 auto;">
+        <h1 class="hero-title">About <span class="text-neon">Minddora AI</span></h1>
+        <p class="hero-subtitle" style="margin: 0 auto var(--space-xl);">
+            Minddora AI was built on a simple idea: students shouldn't have to
+            manually dig through hundreds of pages of notes to find one answer.
+            By combining semantic search with your own uploaded material,
+            Minddora AI turns your notes into a searchable, conversational
+            knowledge base — grounded entirely in what you've actually studied.
+        </p>
+    </div>
+</section>
+
+<section class="features-preview">
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>Make studying faster and more effective by connecting students directly with their own material.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Your notes stay yours. Documents are private by default and never shared across accounts.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🌱</div>
+        <h3>Built for Students</h3>
+        <p>Designed from the ground up around real study workflows — not generic chatbot features.</p>
+    </div>
+</section>
+{% endblock %}

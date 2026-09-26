@@ -1,0 +1,55 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}AI Analytics{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>AI Analytics</h2>
+    <span class="admin-page-subtitle">Last 30 days</span>
+</div>
+
+<div class="stats-grid">
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_documents }}</div>
+        <div class="stat-label">Documents Uploaded</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_chunks }}</div>
+        <div class="stat-label">Total Chunks Indexed</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_questions_asked }}</div>
+        <div class="stat-label">Questions Asked</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ (stats.average_confidence_score * 100) | round(0) | int }}%</div>
+        <div class="stat-label">Avg. Answer Confidence</div>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h3>Your Activity Over Time</h3>
+    <div id="activity-chart" data-chart-data='{{ stats.questions_per_day | tojson }}' class="chart-container"></div>
+</div>
+
+<div class="glass-card mt-lg">
+    <h3>Top Subjects</h3>
+    {% if stats.top_subjects %}
+        <ul class="recent-list">
+            {% for subject in stats.top_subjects %}
+            <li class="subject-bar-row">
+                <span>{{ subject.subject }}</span>
+                <span class="status-badge status-active">{{ subject.document_count }} docs</span>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="empty-state-text">Tag your documents with a subject to see this breakdown.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

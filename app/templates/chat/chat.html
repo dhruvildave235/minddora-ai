@@ -1,0 +1,100 @@
+﻿{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}{% if session %}{{ session.title }}{% else %}New Conversation{% endif %}{% endblock %}
+{% block dashboard_extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">{% endblock %}
+
+{% block dashboard_content %}
+
+<div id="ai-mode-modal" class="modal-overlay hidden">
+    <div class="glass-card modal-panel">
+        <h3>How should this chat answer?</h3>
+        <p class="mt-lg" style="font-size: 0.85rem; color: var(--color-text-muted);">
+            Local uses only your notes with no external API. AI-Powered sends your notes' relevant excerpts to Google Gemini using your own free API key.
+        </p>
+
+        <div class="mode-choice-row mt-lg">
+            <button id="mode-local-btn" class="btn btn-ghost" style="width:100%;">Local (no AI, private)</button>
+            <button id="mode-gemini-btn" class="btn btn-neon mt-lg" style="width:100%;">AI-Powered (Gemini)</button>
+        </div>
+
+        <div id="gemini-key-form" class="hidden mt-lg">
+            <div class="form-group">
+                <label for="gemini-api-key-input">Gemini API Key</label>
+                <input type="password" id="gemini-api-key-input" class="glass-input" placeholder="Paste your free key from ai.google.dev">
+            </div>
+            <div class="form-group">
+                <label for="gemini-model-input">Model Name</label>
+                <input type="text" id="gemini-model-input" class="glass-input" placeholder="gemini-2.0-flash" value="gemini-2.0-flash">
+            </div>
+            <button id="gemini-save-btn" class="btn btn-neon" style="width:100%;">Save & Use AI Mode</button>
+        </div>
+    </div>
+</div>
+
+<div class="chat-page-layout"
+     data-session-id="{{ session.id if session else '' }}"
+     data-document-id="{{ document.id if document else '' }}">
+
+    <!-- <div class="admin-page-header">
+        <h2>{% if document %}Chatting about: {{ document.title }}{% else %}Chat with your Notes{% endif %}</h2>
+        {% if document %}
+        <a href="{{ url_for('chat.chat_home') }}" class="auth-link-small">Chat across all notes instead</a>
+        {% endif %}
+    </div> -->
+
+    <div class="admin-page-header">
+        <h2>{% if document %}Chatting about: {{ document.title }}{% else %}Chat with your Notes{% endif %}</h2>
+        <div style="display:flex; align-items:center; gap: var(--space-md);">
+            {% if document %}
+            <a href="{{ url_for('chat.chat_home') }}" class="auth-link-small">Chat across all notes instead</a>
+            {% endif %}
+            <a href="{{ url_for('dashboard.settings') }}#settings-ai-mode-select" class="ai-mode-badge {{ 'ai-mode-badge-gemini' if ai_mode == 'gemini' else 'ai-mode-badge-local' }}" title="Click to change in Settings">
+                {{ "✨ AI-Powered" if ai_mode == "gemini" else "📄 Local" }}
+            </a>
+        </div>
+    </div>
+
+    <div id="chat-messages-container" class="chat-messages-container">
+        {% if session and session.messages.all() %}
+            {% for message in session.messages %}
+            <div class="chat-message-row role-{{ message.role }}">
+                <div class="chat-message-bubble">
+                    <div class="message-content">{{ message.content | safe }}</div>
+                    {% if message.role == 'assistant' %}
+                        {% if message.confidence_score is not none %}
+                        <span class="chat-confidence-badge confidence-{{ 'high' if message.confidence_score >= 0.7 else ('medium' if message.confidence_score >= 0.4 else 'low') }}">
+                            {{ (message.confidence_score * 100) | round(0) | int }}% confidence
+                        </span>
+                        {% endif %}
+                        {% if message.citations %}
+                        <div class="chat-citations-list">
+                            {% for citation in message.citations %}
+                            <span class="chat-citation-chip">Source {{ citation.source_number }}{% if citation.page_number %} p.{{ citation.page_number }}{% endif %}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="chat-message-actions">
+                            <button onclick="copyMessageContent(this)">Copy</button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="empty-state-text text-center mt-lg">
+            <p>Ask a question about {% if document %}this document{% else %}your uploaded notes{% endif %} to get started.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <form id="chat-input-form" class="chat-input-bar">
+        <textarea id="chat-input-textarea" class="glass-input" placeholder="Ask a question about your notes..." rows="1" required></textarea>
+        <button type="submit" class="btn btn-neon">Send</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

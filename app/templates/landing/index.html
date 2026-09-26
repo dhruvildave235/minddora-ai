@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Minddora AI — Your Intelligent AI-Powered Study Companion{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="particle-background" class="particle-background"></div>
+
+<!-- ======================================================================
+     Navigation
+     ====================================================================== -->
+<!-- <nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo">
+            <span class="logo-text">Minddora<span class="logo-accent">AI</span></span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('landing.features') }}">Features</a></li>
+            <li><a href="{{ url_for('landing.about') }}">About</a></li>
+            <li><a href="{{ url_for('landing.pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('landing.contact') }}">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+             <a href="{{ url_for('admin.login') }}" class="nav-admin-link">Admin</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">Sign In</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+        </div>
+    </div>
+</nav> -->
+
+{% include "landing/_nav.html" %}
+
+<!-- ======================================================================
+     Hero Section
+     ====================================================================== -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Your Intelligent <span class="text-neon">AI-Powered</span> Study Companion
+        </h1>
+        <p class="hero-subtitle">
+            Upload your notes. Ask questions in plain English. Get accurate,
+            cited answers pulled directly from your own study material —
+            powered by semantic search, not guesswork.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-neon btn-large">Start Studying Smarter</a>
+            <a href="{{ url_for('landing.features') }}" class="btn btn-ghost btn-large">See How It Works</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="glass-card floating-card">
+            <div class="chat-preview">
+                <div class="chat-bubble chat-bubble-user">What's the second law of thermodynamics?</div>
+                <div class="chat-bubble chat-bubble-ai">
+                    Based on your notes (Page 12): entropy of an isolated system
+                    never decreases over time...
+                    <span class="citation-tag">Source 1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================================================================
+     Feature Highlights
+     ====================================================================== -->
+<section class="features-preview">
+    <div class="glass-card feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>Upload Any Format</h3>
+        <p>PDF, DOCX, TXT, Markdown, even scanned images with OCR.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Hybrid Smart Search</h3>
+        <p>Semantic + keyword search with cross-encoder reranking for pinpoint accuracy.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Chat With Your Notes</h3>
+        <p>Ask natural questions and get answers with clickable source citations.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/particles.js') }}"></script>
+{% endblock %}

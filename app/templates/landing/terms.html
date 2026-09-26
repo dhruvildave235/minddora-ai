@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Terms of Service — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo"><span class="logo-text">Minddora<span class="logo-accent">AI</span></span></a>
+    </div>
+</nav>
+
+<div class="hero-section" style="grid-template-columns: 1fr; min-height: auto; padding-bottom: var(--space-2xl);">
+    <div class="glass-card" style="max-width: 760px; margin: 0 auto;">
+        <h1>Terms of Service</h1>
+        <p class="mt-lg">Last updated: July 2026</p>
+
+        <h3 class="mt-lg">1. Use of Service</h3>
+        <p>Minddora AI is provided as a study assistant tool. You are responsible for the content you upload and for using the service in compliance with your institution's academic integrity policies.</p>
+
+        <h3 class="mt-lg">2. Your Content</h3>
+        <p>Documents you upload remain your own. We store them only to provide the service to you and do not share your uploaded content with other users.</p>
+
+        <h3 class="mt-lg">3. Acceptable Use</h3>
+        <p>Do not upload content you don't have the right to use, or content that is illegal, harmful, or violates others' rights.</p>
+
+        <h3 class="mt-lg">4. Account Responsibility</h3>
+        <p>You are responsible for keeping your account credentials secure and for all activity under your account.</p>
+
+        <h3 class="mt-lg">5. Changes</h3>
+        <p>We may update these terms from time to time. Continued use of the service after changes constitutes acceptance of the new terms.</p>
+    </div>
+</div>
+{% endblock %}

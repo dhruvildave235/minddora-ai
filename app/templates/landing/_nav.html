@@ -1,0 +1,32 @@
+<nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo">
+            <span class="logo-text">Minddora<span class="logo-accent">AI</span></span>
+        </a>
+
+        <div class="nav-right-side">
+            <div class="nav-collapsible" id="nav-collapsible">
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('landing.features') }}">Features</a></li>
+                    <li><a href="{{ url_for('landing.about') }}">About</a></li>
+                    <li><a href="{{ url_for('landing.pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('landing.contact') }}">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <!-- <a href="{{ url_for('admin.login') }}" class="nav-admin-link">Admin</a> -->
+                     <a href="{{ url_for('admin.login') }}" class="nav-admin-pill">
+    Admin
+</a>    
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">Sign In</a>
+                </div>
+            </div>
+
+            <div class="nav-right-group">
+                <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+                <button class="nav-hamburger" data-nav-toggle aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

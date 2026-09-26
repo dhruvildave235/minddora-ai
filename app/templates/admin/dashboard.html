@@ -1,0 +1,52 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}Admin Dashboard{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>Dashboard</h2>
+    <span class="admin-page-subtitle">Last 7 days overview</span>
+</div>
+
+<div class="stats-grid">
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_users }}</div>
+        <div class="stat-label">Total Students</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_documents }}</div>
+        <div class="stat-label">Documents Uploaded</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_questions_asked }}</div>
+        <div class="stat-label">Questions Asked</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_vectors_stored }}</div>
+        <div class="stat-label">Vectors Stored</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.open_feedback_count }}</div>
+        <div class="stat-label">Open Feedback</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.error_log_count_last_24h }}</div>
+        <div class="stat-label">Errors (Last 24h)</div>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h3>Signups Over Time</h3>
+    <div id="signups-chart" data-chart-data='{{ stats.signups_per_day | tojson }}' class="chart-container"></div>
+</div>
+
+<div class="glass-card mt-lg">
+    <h3>Questions Asked Over Time</h3>
+    <div id="questions-chart" data-chart-data='{{ stats.questions_per_day | tojson }}' class="chart-container"></div>
+</div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

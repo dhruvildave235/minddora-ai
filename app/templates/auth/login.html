@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In — Minddora AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div class="auth-page">
+    <!-- <div class="glass-card auth-card neon-border glow-cyan">
+        <div class="auth-header"> -->
+    <div class="glass-card auth-card neon-border glow-cyan">
+        <a href="{{ url_for('landing.index') }}" class="auth-back-arrow" aria-label="Back to home">←</a>
+        <div class="auth-header">
+            <a href="{{ url_for('landing.index') }}" class="auth-logo">
+                Minddora<span class="text-neon">AI</span>
+            </a>
+            <h2>Welcome Back</h2>
+            <p>Sign in to continue chatting with your notes.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                {{ form.email(class="glass-input" + (" input-error" if form.email.errors else ""), id="email", placeholder="dhruvil@example.com") }}
+                {% for error in form.email.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-wrapper">
+                    {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="Enter your password") }}
+                    <button type="button" class="password-toggle-btn" data-target="password" aria-label="Show password">👁</button>
+                </div>
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="Enter your password") }}
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div> -->
+
+            <div class="form-row-between">
+                <div class="form-checkbox-group">
+                    {{ form.remember_me(id="remember_me") }}
+                    <label for="remember_me">Keep me signed in</label>
+                </div>
+                <a href="{{ url_for('auth.forgot_password') }}" class="auth-link-small">Forgot password?</a>
+            </div>
+
+            {{ form.submit(class="btn btn-neon btn-large auth-submit-btn") }}
+        </form>
+
+        <p class="auth-footer-text">
+            Don't have an account? <a href="{{ url_for('auth.register') }}">Create one</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

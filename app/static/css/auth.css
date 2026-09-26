@@ -1,0 +1,209 @@
+/* ==========================================================================
+   auth.css
+   Styles for Register, Login, Forgot Password, and Reset Password pages.
+   Depends on tokens/components from base.css and glassmorphism.css.
+   ========================================================================== */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+    background: radial-gradient(ellipse at top, #0d1226 0%, var(--color-bg-primary) 70%);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: var(--space-xl);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.auth-logo {
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: var(--space-lg);
+}
+
+.auth-header h2 {
+    margin-bottom: var(--space-xs);
+}
+
+.auth-header p {
+    font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   Form Layout
+   -------------------------------------------------------------------------- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.form-checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.form-checkbox-group label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+
+.form-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.auth-link-small {
+    font-size: 0.85rem;
+    color: var(--color-accent-cyan);
+}
+
+.auth-link-small:hover {
+    text-decoration: underline;
+}
+
+.auth-submit-btn {
+    width: 100%;
+    margin-top: var(--space-sm);
+}
+
+.auth-footer-text {
+    text-align: center;
+    margin-top: var(--space-lg);
+    font-size: 0.9rem;
+}
+
+.auth-footer-text a {
+    color: var(--color-accent-cyan);
+    font-weight: 600;
+}
+
+.auth-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Password Strength Meter (populated dynamically by auth.js)
+   -------------------------------------------------------------------------- */
+.password-strength-meter {
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    margin-top: var(--space-xs);
+}
+
+.password-strength-meter::after {
+    content: "";
+    display: block;
+    height: 100%;
+    width: var(--strength-percent, 0%);
+    background: var(--strength-color, var(--color-error));
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Terms/Privacy Links in Checkbox Label
+   -------------------------------------------------------------------------- */
+.terms-link {
+    color: var(--color-accent-cyan);
+    text-decoration: underline;
+}
+
+.terms-link:hover {
+    color: var(--color-accent-blue);
+}
+
+
+
+/* --------------------------------------------------------------------------
+   Back Arrow (top-left of auth cards)
+   -------------------------------------------------------------------------- */
+.auth-card {
+    position: relative;
+}
+
+.auth-back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-back-arrow:hover {
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--color-accent-cyan);
+    transform: translateX(-2px);
+}
+
+
+/* --------------------------------------------------------------------------
+   Password Show/Hide Toggle
+   -------------------------------------------------------------------------- */
+.password-input-wrapper {
+    position: relative;
+}
+
+.password-input-wrapper .glass-input {
+    padding-right: 44px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    color: var(--color-accent-cyan);
+}
+
+.password-toggle-btn.active {
+    color: var(--color-accent-cyan);
+}

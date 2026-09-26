@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Features — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<!-- <nav class="glass-nav">
+    <div class="nav-container">
+        <a href="{{ url_for('landing.index') }}" class="nav-logo"><span class="logo-text">Minddora<span class="logo-accent">AI</span></span></a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('landing.features') }}">Features</a></li>
+            <li><a href="{{ url_for('landing.about') }}">About</a></li>
+            <li><a href="{{ url_for('landing.pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('landing.contact') }}">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">Sign In</a>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-neon">Get Started</a>
+        </div>
+    </div>
+</nav> -->
+
+{% include "landing/_nav.html" %}
+
+<section class="hero-section" style="grid-template-columns: 1fr; text-align: center; min-height: 40vh;">
+    <div class="hero-content" style="margin: 0 auto;">
+        <h1 class="hero-title">Everything You Need to <span class="text-neon">Study Smarter</span></h1>
+    </div>
+</section>
+
+<section class="features-preview" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="glass-card feature-card glow-blue">
+        <div class="feature-icon">📄</div>
+        <h3>Multi-Format Upload</h3>
+        <p>PDF, DOCX, TXT, Markdown, and scanned images with built-in OCR — all supported.</p>
+    </div>
+    <div class="glass-card feature-card glow-cyan">
+        <div class="feature-icon">🔍</div>
+        <h3>Hybrid Search Engine</h3>
+        <p>Combines semantic embeddings (MiniLM) with BM25 keyword search, then reranks results with a cross-encoder for pinpoint accuracy.</p>
+    </div>
+    <div class="glass-card feature-card glow-purple">
+        <div class="feature-icon">💬</div>
+        <h3>Conversational Chat</h3>
+        <p>Ask natural questions and get answers extracted directly from your notes, with clickable source citations.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🕘</div>
+        <h3>Full Conversation History</h3>
+        <p>Every conversation is saved, searchable, and can be bookmarked for quick access later.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Personal Analytics</h3>
+        <p>Track your study activity, top subjects, and how confidently the AI is answering your questions.</p>
+    </div>
+    <div class="glass-card feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Private by Default</h3>
+        <p>Your documents are scoped entirely to your account — never visible to other students.</p>
+    </div>
+</section>
+{% endblock %}

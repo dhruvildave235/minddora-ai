@@ -1,0 +1,72 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}Dashboard{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-welcome">
+    <h2>Welcome back, {{ current_user.full_name.split(' ')[0] }} 👋</h2>
+    <p>Here's what's happening with your study materials.</p>
+</div>
+
+<div class="stats-grid">
+    <div class="glass-card stat-card glow-blue">
+        <div class="stat-value">{{ quick_stats.total_documents }}</div>
+        <div class="stat-label">Documents Uploaded</div>
+    </div>
+    <div class="glass-card stat-card glow-cyan">
+        <div class="stat-value">{{ quick_stats.total_questions_asked }}</div>
+        <div class="stat-label">Questions Asked</div>
+    </div>
+    <div class="glass-card stat-card glow-purple">
+        <div class="stat-value">{{ (quick_stats.storage_used_bytes / 1048576) | round(2) }} MB</div>
+        <div class="stat-label">Storage Used</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ (quick_stats.average_confidence_score * 100) | round(0) | int }}%</div>
+        <div class="stat-label">Avg. Answer Confidence</div>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+    <div class="glass-card">
+        <div class="section-header">
+            <h3>Recent Documents</h3>
+            <a href="{{ url_for('documents.my_documents') }}" class="auth-link-small">View all</a>
+        </div>
+        {% if recent_documents %}
+            <ul class="recent-list">
+                {% for doc in recent_documents %}
+                <li>
+                    <a href="{{ url_for('documents.viewer', document_id=doc.id) }}">
+                        <span class="recent-item-title">{{ doc.title }}</span>
+                        <span class="status-badge status-{{ doc.processing_status }}">{{ doc.processing_status }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state-text">No documents yet. <a href="{{ url_for('documents.upload') }}">Upload your first one</a>.</p>
+        {% endif %}
+    </div>
+
+    <div class="glass-card">
+        <div class="section-header">
+            <h3>Recent Conversations</h3>
+            <a href="{{ url_for('chat.history') }}" class="auth-link-small">View all</a>
+        </div>
+        {% if recent_sessions %}
+            <ul class="recent-list">
+                {% for session in recent_sessions %}
+                <li>
+                    <a href="{{ url_for('chat.chat_session', session_id=session.id) }}">
+                        <span class="recent-item-title">{{ session.title }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-state-text">No conversations yet. <a href="{{ url_for('chat.chat_home') }}">Start chatting</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

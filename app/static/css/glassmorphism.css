@@ -1,0 +1,341 @@
+/* ==========================================================================
+   glassmorphism.css
+   Reusable glass-panel + neon glow component system used across every
+   page: cards, navigation, modals, toasts, inputs. Depends on the design
+   tokens defined in base.css (--glass-bg, --glass-border, --glow-*, etc).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Core Glass Panel
+   -------------------------------------------------------------------------- */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    padding: var(--space-lg);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Neon-bordered variant for emphasis (feature cards, active states) */
+.glass-card.neon-border {
+    border-image: var(--color-accent-gradient) 1;
+}
+
+.glass-card.glow-blue:hover { box-shadow: var(--glow-blue); }
+.glass-card.glow-cyan:hover { box-shadow: var(--glow-cyan); }
+.glass-card.glow-purple:hover { box-shadow: var(--glow-purple); }
+
+/* --------------------------------------------------------------------------
+   Floating Animation (used on hero preview cards)
+   -------------------------------------------------------------------------- */
+.floating-card {
+    animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+}
+
+/* --------------------------------------------------------------------------
+   Glass Navigation Bar
+   -------------------------------------------------------------------------- */
+.glass-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 14, 26, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo .logo-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+}
+
+.nav-logo .logo-accent {
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.nav-links a {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-accent-cyan);
+}
+
+.nav-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Hamburger Menu (mobile) + Collapsible Nav Panel
+   -------------------------------------------------------------------------- */
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text-primary);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-collapsible {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+/* .nav-admin-link {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    padding: 0 var(--space-sm);
+    transition: color 0.2s ease;
+}
+
+.nav-admin-link:hover {
+    color: var(--color-accent-purple);
+} */
+
+
+/* --------------------------------------------------------------------------
+   Admin Capsule Button
+   -------------------------------------------------------------------------- */
+.nav-admin-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 42px;
+    padding: 0 1.4rem;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: all 0.3s ease;
+}
+
+.nav-admin-pill:hover {
+    color: var(--color-accent-purple);
+
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.35);
+
+    box-shadow:
+        0 0 18px rgba(139, 92, 246, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+    transform: translateY(-2px);
+}
+
+.nav-admin-pill:active {
+    transform: scale(0.97);
+}
+
+
+.nav-right-side {
+    display: flex;
+    align-items: center;
+    /* gap: var(--space-lg); */
+     gap: 0.6rem; 
+}
+
+.nav-right-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+
+/* --------------------------------------------------------------------------
+   Glass Input Fields (forms: login, register, upload title, etc.)
+   -------------------------------------------------------------------------- */
+.glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    color: var(--color-text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: var(--color-accent-cyan);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+
+/* Force readable text even when the browser autofills a white background */
+.glass-input:-webkit-autofill,
+.glass-input:-webkit-autofill:hover,
+.glass-input:-webkit-autofill:focus,
+.glass-input:-webkit-autofill:active {
+    -webkit-text-fill-color: #0a0a0a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    caret-color: #0a0a0a;
+    border-color: var(--color-accent-cyan) !important;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #0a0a0a !important;
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+}
+
+.glass-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+select.glass-input option {
+    background-color: #10121c;
+    color: var(--color-text-primary);
+    padding: 0.5rem;
+}
+
+select.glass-input option:checked,
+select.glass-input option:hover {
+    background-color: var(--color-accent-blue);
+    color: #ffffff;
+}
+
+.glass-input.input-error {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.field-error-message {
+    color: var(--color-error);
+    font-size: 0.8rem;
+    margin-top: var(--space-xs);
+}
+
+/* --------------------------------------------------------------------------
+   Modal Windows
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 15, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-panel {
+    max-width: 480px;
+    width: 90%;
+    animation: modal-pop 0.25s ease;
+}
+
+@keyframes modal-pop {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --------------------------------------------------------------------------
+   Toast Notification Items
+   -------------------------------------------------------------------------- */
+.toast-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 280px;
+    max-width: 380px;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: rgba(15, 20, 35, 0.9);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: toast-slide-in 0.3s ease;
+}
+
+.toast-item.toast-success { border-left: 3px solid var(--color-success); }
+.toast-item.toast-error { border-left: 3px solid var(--color-error); }
+.toast-item.toast-info { border-left: 3px solid var(--color-info); }
+.toast-item.toast-warning { border-left: 3px solid var(--color-warning); }
+
+@keyframes toast-slide-in {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* --------------------------------------------------------------------------
+   Skeleton Loading States
+   -------------------------------------------------------------------------- */
+.skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 37%, rgba(255,255,255,0.04) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.4s ease infinite;
+    border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-shimmer {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

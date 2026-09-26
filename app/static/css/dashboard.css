@@ -1,0 +1,259 @@
+/* ==========================================================================
+   dashboard.css
+   Shared layout and component styles for the student-facing app shell:
+   Dashboard, Profile, Settings, AI Analytics, My Documents, Upload Notes,
+   Document Viewer. Depends on tokens/components from base.css and
+   glassmorphism.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   App Shell Layout (sidebar + main content) — mirrors admin.css's
+   .admin-shell pattern for visual consistency across the whole product.
+   -------------------------------------------------------------------------- */
+.app-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+}
+
+.app-sidebar {
+    background: rgba(10, 14, 26, 0.85);
+    border-right: 1px solid var(--glass-border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.app-sidebar-logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.app-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.app-nav-links a {
+    padding: 0.65rem 0.9rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.app-nav-links a:hover,
+.app-nav-links a.active {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--color-accent-blue);
+}
+
+.app-main {
+    padding: var(--space-xl);
+    overflow-y: auto;
+}
+
+.app-mobile-toggle {
+    display: none;
+    margin-bottom: var(--space-md);
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard Home Page
+   -------------------------------------------------------------------------- */
+/* .dashboard-welcome {
+    margin-bottom: var(--space-xl);
+}
+
+.dashboard-welcome p {
+    margin-top: var(--space-xs);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+} */
+
+/* --------------------------------------------------------------------------
+   Dashboard Home Page
+   -------------------------------------------------------------------------- */
+.dashboard-welcome {
+    margin-bottom: var(--space-xl);
+}
+
+/* /* --------------------------------------------------------------------------
+   Stat Cards Grid (Dashboard)
+   -------------------------------------------------------------------------- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    padding: var(--space-lg);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.1;
+}
+
+.stat-card .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+} */
+
+.dashboard-welcome p {
+    margin-top: var(--space-xs);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.dashboard-grid .glass-card {
+    height: 100%;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+.recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.recent-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease;
+}
+
+.recent-list a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.recent-item-title {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+}
+
+.empty-state-text {
+    font-size: 0.9rem;
+}
+
+.empty-state-text a {
+    color: var(--color-accent-cyan);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Profile Page
+   -------------------------------------------------------------------------- */
+.profile-avatar-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.profile-avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-accent-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.profile-detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.9rem;
+}
+
+.profile-detail-label {
+    color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: collapse sidebar on tablet/mobile (mirrors admin.css)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .app-sidebar {
+        display: none;
+    }
+
+    .app-sidebar.mobile-open {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        z-index: 1500;
+    }
+
+    .app-mobile-toggle {
+        display: inline-flex;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   Chart Container (AI Analytics page)
+   -------------------------------------------------------------------------- */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    margin-top: var(--space-md);
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}

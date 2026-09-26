@@ -1,0 +1,57 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}System Analytics{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>System Analytics</h2>
+    <select id="analytics-days-filter" class="glass-input" style="max-width: 180px;">
+        <option value="7" {{ "selected" if selected_days == 7 }}>Last 7 days</option>
+        <option value="30" {{ "selected" if selected_days == 30 }}>Last 30 days</option>
+        <option value="90" {{ "selected" if selected_days == 90 }}>Last 90 days</option>
+        <option value="365" {{ "selected" if selected_days == 365 }}>Last year</option>
+    </select>
+</div>
+
+<div class="stats-grid">
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_users }}</div>
+        <div class="stat-label">Total Students</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.active_users }}</div>
+        <div class="stat-label">Active Students</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_documents }}</div>
+        <div class="stat-label">Total Documents</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_chunks }}</div>
+        <div class="stat-label">Total Chunks</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ stats.total_chat_sessions }}</div>
+        <div class="stat-label">Chat Sessions</div>
+    </div>
+    <div class="glass-card stat-card">
+        <div class="stat-value">{{ (stats.total_storage_used_bytes / 1048576) | round(2) }} MB</div>
+        <div class="stat-label">Storage Used</div>
+    </div>
+</div>
+
+<div class="glass-card">
+    <h3>Signups Over Time</h3>
+    <div id="system-signups-chart" data-chart-data='{{ stats.signups_per_day | tojson }}' class="chart-container"></div>
+</div>
+
+<div class="glass-card mt-lg">
+    <h3>Questions Asked Over Time</h3>
+    <div id="system-questions-chart" data-chart-data='{{ stats.questions_per_day | tojson }}' class="chart-container"></div>
+</div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

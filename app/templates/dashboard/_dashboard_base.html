@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}{% block dashboard_title %}Dashboard{% endblock %} — Minddora AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% block dashboard_extra_css %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div class="app-shell">
+    <aside class="app-sidebar">
+        <a href="{{ url_for('dashboard.index') }}" class="app-sidebar-logo">
+            Minddora<span class="text-neon">AI</span>
+        </a>
+
+        <nav class="app-nav-links">
+            <a href="{{ url_for('dashboard.index') }}" class="{{ 'active' if request.endpoint == 'dashboard.index' }}">🏠 Dashboard</a>
+            <a href="{{ url_for('documents.upload') }}" class="{{ 'active' if request.endpoint == 'documents.upload' }}">📤 Upload Notes</a>
+            <a href="{{ url_for('documents.my_documents') }}" class="{{ 'active' if request.endpoint == 'documents.my_documents' }}">📚 My Documents</a>
+            <a href="{{ url_for('chat.chat_home') }}" class="{{ 'active' if request.endpoint and request.endpoint.startswith('chat.chat') }}">💬 Chat with Notes</a>
+            <a href="{{ url_for('chat.search_notes_page') }}" class="{{ 'active' if request.endpoint == 'chat.search_notes_page' }}">🔍 Search Notes</a>
+            <a href="{{ url_for('chat.history') }}" class="{{ 'active' if request.endpoint == 'chat.history' }}">🕘 History</a>
+            <a href="{{ url_for('chat.saved_conversations') }}" class="{{ 'active' if request.endpoint == 'chat.saved_conversations' }}">⭐ Saved Conversations</a>
+            <a href="{{ url_for('dashboard.analytics') }}" class="{{ 'active' if request.endpoint == 'dashboard.analytics' }}">📈 AI Analytics</a>
+            <a href="{{ url_for('dashboard.profile') }}" class="{{ 'active' if request.endpoint == 'dashboard.profile' }}">👤 Profile</a>
+            <a href="{{ url_for('dashboard.settings') }}" class="{{ 'active' if request.endpoint == 'dashboard.settings' }}">⚙️ Settings</a>
+            <a href="#" id="open-feedback-modal-btn">💬 Send Feedback</a>
+        </nav>
+
+        <div style="margin-top: auto;">
+            <a href="{{ url_for('auth.logout') }}" class="btn btn-ghost" style="width: 100%;">Sign Out</a>
+        </div>
+    </aside>
+
+    <main class="app-main">
+        <button data-nav-toggle class="btn btn-ghost app-mobile-toggle">☰ Menu</button>
+        {% block dashboard_content %}{% endblock %}
+    </main>
+</div>
+
+<!-- ======================================================================
+     Feedback Submission Modal
+     ====================================================================== -->
+<div id="feedback-submit-modal" class="modal-overlay hidden">
+    <div class="glass-card modal-panel">
+        <h3>Send Feedback</h3>
+
+        <div class="form-group mt-lg">
+            <label for="feedback-category-select">Category</label>
+            <select id="feedback-category-select" class="glass-input">
+                <option value="general">General</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature_request">Feature Request</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="feedback-subject-input">Subject</label>
+            <input type="text" id="feedback-subject-input" class="glass-input" placeholder="Brief summary">
+        </div>
+
+        <div class="form-group">
+            <label for="feedback-message-input">Message</label>
+            <textarea id="feedback-message-input" class="glass-input" rows="4" placeholder="Tell us more..."></textarea>
+        </div>
+
+        <div class="modal-actions mt-lg">
+            <button id="feedback-submit-cancel" class="btn btn-ghost">Cancel</button>
+            <button id="feedback-submit-send" class="btn btn-neon">Send Feedback</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ super() }}
+{% block dashboard_extra_js %}{% endblock %}
+{% endblock %}

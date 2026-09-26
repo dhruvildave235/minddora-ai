@@ -1,0 +1,59 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}Document Management{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>Document Management</h2>
+    <select id="document-status-filter" class="glass-input" style="max-width: 220px;">
+        <option value="">All Statuses</option>
+        <option value="ready">Ready</option>
+        <option value="queued">Queued</option>
+        <option value="extracting">Extracting</option>
+        <option value="chunking">Chunking</option>
+        <option value="embedding">Embedding</option>
+        <option value="failed">Failed</option>
+    </select>
+</div>
+
+<p class="admin-privacy-note">
+    🔒 For student privacy, only document metadata is shown here — not the contents of uploaded notes.
+</p>
+
+<div class="glass-card admin-table-wrapper">
+    <!-- <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Owner (User ID)</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Status</th>
+                <th>Uploaded</th>
+                <th>Actions</th>
+            </tr>
+        </thead> -->
+        <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Owner</th>
+                <th>Type</th>
+                <th>Size</th>
+                <th>Status</th>
+                <th>Uploaded</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="documents-table-body">
+            <tr><td colspan="7" class="skeleton" style="height: 40px;"></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="documents-pagination" class="pagination-controls"></div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

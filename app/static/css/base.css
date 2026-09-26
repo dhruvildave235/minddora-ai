@@ -1,0 +1,199 @@
+/* ==========================================================================
+   base.css
+   Global reset, CSS custom properties (design tokens), and base typography
+   for Minddora AI's futuristic glassmorphism + neon HUD theme.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   CSS Reset
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Design Tokens — Colors
+   -------------------------------------------------------------------------- */
+:root {
+    /* Base background layers */
+    --color-bg-primary: #05070f;
+    --color-bg-secondary: #0a0e1a;
+    --color-bg-tertiary: #10152680;
+
+    /* Glass panel surfaces */
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-blur: 16px;
+
+    /* Neon accent palette — Blue + Cyan + Purple */
+    --color-accent-blue: #3b82f6;
+    --color-accent-cyan: #22d3ee;
+    --color-accent-purple: #a855f7;
+    --color-accent-gradient: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-cyan), var(--color-accent-purple));
+
+    /* Text colors */
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+
+    /* Status colors */
+    --color-success: #22c55e;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: var(--color-accent-cyan);
+
+    /* Spacing scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 4rem;
+
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+
+    /* Shadows / Glows */
+    --glow-blue: 0 0 24px rgba(59, 130, 246, 0.35);
+    --glow-cyan: 0 0 24px rgba(34, 211, 238, 0.35);
+    --glow-purple: 0 0 24px rgba(168, 85, 247, 0.35);
+
+    /* Typography */
+    --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* --------------------------------------------------------------------------
+   Base Typography & Body
+   -------------------------------------------------------------------------- */
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+h3 { font-size: 1.5rem; }
+
+p {
+    color: var(--color-text-secondary);
+}
+
+.text-neon {
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-neon {
+    background: var(--color-accent-gradient);
+    color: #ffffff;
+    box-shadow: var(--glow-blue);
+}
+
+.btn-neon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 32px rgba(59, 130, 246, 0.5);
+}
+
+.btn-ghost {
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    color: var(--color-text-primary);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+}
+
+/* --------------------------------------------------------------------------
+   Toast Notifications (container only — item styling in glassmorphism.css)
+   -------------------------------------------------------------------------- */
+.toast-container {
+    position: fixed;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Utility Classes
+   -------------------------------------------------------------------------- */
+.text-center { text-align: center; }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.hidden { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   Global Footer
+   -------------------------------------------------------------------------- */
+
+
+.site-footer {
+    text-align: center;
+    padding: 20px 0;
+}

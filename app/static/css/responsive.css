@@ -1,0 +1,112 @@
+/* ==========================================================================
+   responsive.css
+   Global responsive breakpoint rules shared across ALL pages (nav
+   collapsing, container padding, font scaling). Page-specific responsive
+   overrides live in their own stylesheet (landing.css, dashboard.css,
+   chat.css, admin.css) and are layered on top of these base rules.
+
+   Breakpoints:
+       Desktop:  > 1024px  (default/base styles apply)
+       Tablet:   641px - 1024px
+       Mobile:   <= 640px
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Tablet Breakpoint
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .nav-container {
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .glass-card {
+        padding: var(--space-md);
+    }
+
+    h1 { font-size: clamp(2rem, 5vw, 2.75rem); }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Breakpoint
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .nav-collapsible {
+        display: none;
+    }
+
+    .nav-collapsible.mobile-menu-open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 14, 26, 0.97);
+        backdrop-filter: blur(20px);
+        padding: var(--space-lg);
+        gap: var(--space-md);
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .nav-collapsible .nav-links {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .nav-collapsible .nav-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-sm);
+    }
+
+    .nav-actions {
+        gap: var(--space-xs);
+    }
+
+    .btn-large {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .toast-container {
+        left: var(--space-md);
+        right: var(--space-md);
+        top: var(--space-md);
+    }
+
+    .toast-item {
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+    }
+
+    .modal-panel {
+        width: 95%;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Respect reduced-motion preference
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}

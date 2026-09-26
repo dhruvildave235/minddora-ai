@@ -1,0 +1,52 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}{{ document.title }}{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <div>
+        <a href="{{ url_for('documents.my_documents') }}" class="auth-link-small">← Back to My Documents</a>
+        <h2 class="mt-lg">{{ document.title }}</h2>
+    </div>
+    {% if document.processing_status == 'ready' %}
+    <a href="{{ url_for('chat.chat_home', document_id=document.id) }}" class="btn btn-neon">💬 Chat with this Document</a>
+    {% endif %}
+</div>
+
+<div class="glass-card" style="max-width: 640px;">
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Original Filename</span>
+        <span>{{ document.original_filename }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">File Type</span>
+        <span>{{ document.file_type | upper }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Size</span>
+        <span>{{ (document.file_size_bytes / 1048576) | round(2) }} MB</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Pages</span>
+        <span>{{ document.page_count or "N/A" }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Chunks Indexed</span>
+        <span>{{ document.total_chunks }}</span>
+    </div>
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Status</span>
+        <span class="status-badge status-{{ document.processing_status }}">{{ document.processing_status }}</span>
+    </div>
+    {% if document.processing_status == 'failed' and document.processing_error %}
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Error</span>
+        <span style="color: var(--color-error);">{{ document.processing_error }}</span>
+    </div>
+    {% endif %}
+    <div class="profile-detail-row">
+        <span class="profile-detail-label">Uploaded</span>
+        <span>{{ document.uploaded_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+    </div>
+</div>
+{% endblock %}

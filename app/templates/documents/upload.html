@@ -1,0 +1,50 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}Upload Notes{% endblock %}
+
+{% block dashboard_extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}?v=3">
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>Upload Notes</h2>
+</div>
+
+<div class="glass-card">
+    <div id="upload-dropzone" class="upload-dropzone">
+        <div class="upload-dropzone-icon">📄</div>
+        <p><strong>Drag & drop</strong> your file here, or click to browse</p>
+        <p class="upload-hint">Supports PDF, DOCX, TXT, Markdown, PNG, JPG (max 25MB)</p>
+        <input type="file" id="upload-file-input" accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg" hidden>
+    </div>
+
+    <div class="form-group mt-lg">
+        <label for="upload-title-input">Title (optional)</label>
+        <input type="text" id="upload-title-input" class="glass-input" placeholder="e.g. Thermodynamics Chapter 4">
+    </div>
+
+    <div class="form-group">
+        <label for="upload-subject-input">Subject (optional)</label>
+        <input type="text" id="upload-subject-input" class="glass-input" placeholder="e.g. Physics">
+    </div>
+
+    <div id="upload-progress-container" class="upload-progress-container hidden">
+        <div class="upload-progress-bar-track">
+            <div id="upload-progress-bar-fill" class="upload-progress-bar-fill" style="width: 0%;"></div>
+        </div>
+        <p id="upload-status-text">Uploading...</p>
+    </div>
+
+    <button id="upload-submit-btn" class="btn btn-neon btn-large mt-lg" disabled>Upload & Process</button>
+</div>
+
+<div id="upload-recent-list" class="glass-card mt-lg hidden">
+    <h3>Recently Uploaded</h3>
+    <ul class="recent-list mt-lg" id="upload-recent-items"></ul>
+</div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

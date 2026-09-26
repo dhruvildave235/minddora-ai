@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Minddora AI — Your Intelligent AI-Powered Study Companion{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}Minddora AI helps students chat with their own notes using AI-powered semantic search and retrieval.{% endblock %}">
+
+    <!-- Global Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/glassmorphism.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    {% block extra_css %}{% endblock %}
+
+    <!-- Favicon -->
+    <!-- <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}"> -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo.png') }}">
+</head>
+<body class="theme-dark">
+
+    <!-- ==================================================================
+         Global Toast Notification Container
+         Populated dynamically by static/js/main.js's showToast() function,
+         and by Flask flash() messages rendered below on full page loads.
+         ================================================================== -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages" data-flash-messages='{{ messages | tojson }}'></div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- ==================================================================
+         Page Content
+         ================================================================== -->
+    {% block content %}{% endblock %}
+
+     <!-- ==================================================================
+         Global Footer
+         ================================================================== -->
+    <footer class="site-footer">
+        <center><p>&copy; 2026 Minddora.AI Team All rights reserved.</p></center>
+        <!-- <a href="{{ url_for('admin.login') }}" class="footer-admin-link">Admin</a> -->
+    </footer>
+
+    <!-- ==================================================================
+         Global Scripts
+         ================================================================== -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

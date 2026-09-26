@@ -1,0 +1,54 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}Database{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>Database</h2>
+</div>
+
+<!-- Password gate -->
+<div id="db-lock-screen" class="glass-card" style="max-width: 420px;">
+    <h3>🔒 Re-enter your password</h3>
+    <!-- <p class="mt-lg" style="font-size: 0.85rem; color: var(--color-text-muted);">
+        For security, viewing raw database tables requires re-entering your admin password.
+    </p>
+    <div class="form-group mt-lg">
+        <input type="password" id="db-unlock-password" class="glass-input" placeholder="Your admin password">
+    </div> -->
+
+     <p class="mt-lg" style="font-size: 0.85rem; color: var(--color-text-muted);">
+        For security, viewing raw database tables requires a separate database access password.
+    </p>
+    <div class="form-group mt-lg">
+        <input type="password" id="db-unlock-password" class="glass-input" placeholder="Database access password">
+    </div>
+    <button id="db-unlock-btn" class="btn btn-neon" style="width: 100%;">Unlock Database View</button>
+</div>
+
+<!-- Table list -->
+<div id="db-table-list" class="hidden">
+    <div class="stats-grid" id="db-tables-grid"></div>
+</div>
+
+<!-- Table data view -->
+<div id="db-table-view" class="hidden">
+    <div class="admin-page-header">
+        <div>
+            <button id="db-back-btn" class="btn btn-ghost btn-sm">← Back to tables</button>
+            <h3 class="mt-lg" id="db-table-title"></h3>
+        </div>
+    </div>
+    <div class="glass-card admin-table-wrapper">
+        <table class="admin-table" id="db-data-table">
+            <thead><tr id="db-table-head"></tr></thead>
+            <tbody id="db-table-body"></tbody>
+        </table>
+    </div>
+    <div id="db-pagination" class="pagination-controls mt-lg"></div>
+</div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="{{ url_for('static', filename='js/database.js') }}"></script>
+{% endblock %}

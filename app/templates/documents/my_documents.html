@@ -1,0 +1,42 @@
+{% extends "dashboard/_dashboard_base.html" %}
+
+{% block dashboard_title %}My Documents{% endblock %}
+
+{% block dashboard_content %}
+<div class="admin-page-header">
+    <h2>My Documents</h2>
+    <a href="{{ url_for('documents.upload') }}" class="btn btn-neon">+ Upload New</a>
+</div>
+
+<div id="documents-grid" class="documents-grid">
+    {% for doc in documents %}
+    <div class="glass-card document-card" data-document-id="{{ doc.id }}">
+        <div class="document-card-icon">
+            {% if doc.file_type == 'pdf' %}📕{% elif doc.file_type == 'docx' %}📘{% elif doc.file_type in ['png','jpg','jpeg'] %}🖼️{% else %}📄{% endif %}
+        </div>
+        <div class="document-card-title">{{ doc.title }}</div>
+        <div class="document-card-meta">
+            {{ (doc.file_size_bytes / 1048576) | round(2) }} MB
+            &middot; <span class="status-badge status-{{ doc.processing_status }}">{{ doc.processing_status }}</span>
+        </div>
+        <div class="document-card-actions">
+            <a href="{{ url_for('documents.viewer', document_id=doc.id) }}" class="btn btn-ghost btn-sm">View</a>
+            {% if doc.processing_status == 'ready' %}
+            <a href="{{ url_for('chat.chat_home', document_id=doc.id) }}" class="btn btn-ghost btn-sm">Chat</a>
+            {% elif doc.processing_status == 'failed' %}
+            <button class="btn btn-ghost btn-sm" onclick="reprocessDocument({{ doc.id }})">Retry</button>
+            {% endif %}
+            <button class="btn btn-ghost btn-sm" onclick="deleteDocument({{ doc.id }})">Delete</button>
+        </div>
+    </div>
+    {% else %}
+    <p class="empty-state-text">You haven't uploaded any documents yet. <a href="{{ url_for('documents.upload') }}">Upload your first one</a>.</p>
+    {% endfor %}
+</div>
+
+<div id="documents-list-pagination" class="pagination-controls mt-lg"></div>
+{% endblock %}
+
+{% block dashboard_extra_js %}
+<script src="{{ url_for('static', filename='js/documents.js') }}"></script>
+{% endblock %}

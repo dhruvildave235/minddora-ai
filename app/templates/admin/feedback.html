@@ -1,0 +1,88 @@
+{% extends "admin/_admin_base.html" %}
+
+{% block admin_title %}Feedback Management{% endblock %}
+
+{% block admin_content %}
+<div class="admin-page-header">
+    <h2>Feedback Management</h2>
+    <div class="admin-filter-group">
+        <select id="feedback-status-filter" class="glass-input">
+            <option value="">All Statuses</option>
+            <option value="open">Open</option>
+            <option value="in_review">In Review</option>
+            <option value="resolved">Resolved</option>
+            <option value="dismissed">Dismissed</option>
+        </select>
+        <select id="feedback-category-filter" class="glass-input">
+            <option value="">All Categories</option>
+            <option value="bug">Bug</option>
+            <option value="feature_request">Feature Request</option>
+            <option value="general">General</option>
+            <option value="answer_rating">Answer Rating</option>
+        </select>
+    </div>
+</div>
+
+<div class="glass-card admin-table-wrapper">
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    <!-- <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+            </tr>
+        </thead> -->
+        <tbody id="feedback-table-body">
+            <tr><td colspan="5" class="skeleton" style="height: 40px;"></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="feedback-pagination" class="pagination-controls"></div>
+
+<!-- ======================================================================
+     Feedback Response Modal
+     ====================================================================== -->
+<div id="feedback-modal" class="modal-overlay hidden">
+    <div class="glass-card modal-panel">
+        <h3 id="feedback-modal-subject">Feedback Subject</h3>
+        <p id="feedback-modal-message" class="mt-lg"></p>
+
+        <div class="form-group mt-lg">
+            <label for="feedback-response-input">Your Response</label>
+            <textarea id="feedback-response-input" class="glass-input" rows="4" placeholder="Write a response..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="feedback-status-select">Status</label>
+            <select id="feedback-status-select" class="glass-input">
+                <option value="in_review">In Review</option>
+                <option value="resolved">Resolved</option>
+                <option value="dismissed">Dismissed</option>
+            </select>
+        </div>
+
+        <div class="modal-actions mt-lg">
+            <button id="feedback-modal-cancel" class="btn btn-ghost">Cancel</button>
+            <button id="feedback-modal-submit" class="btn btn-neon">Send Response</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block admin_extra_js %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}

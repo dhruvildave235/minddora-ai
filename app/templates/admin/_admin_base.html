@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{% block admin_title %}Admin Panel{% endblock %} — Minddora AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% block admin_extra_css %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div class="admin-shell">
+    <aside class="admin-sidebar" id="admin-sidebar">
+        <a href="{{ url_for('admin.dashboard') }}" class="admin-sidebar-logo">
+            Minddora<span class="text-neon">AI</span>
+        </a>
+
+        <nav class="admin-nav-links">
+            <a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">📊 Dashboard</a>
+            <a href="{{ url_for('admin.users') }}" class="{{ 'active' if request.endpoint == 'admin.users' }}">👥 User Management</a>
+            <a href="{{ url_for('admin.documents') }}" class="{{ 'active' if request.endpoint == 'admin.documents' }}">📄 Document Management</a>
+            <a href="{{ url_for('admin.feedback') }}" class="{{ 'active' if request.endpoint == 'admin.feedback' }}">💬 Feedback</a>
+            <a href="{{ url_for('admin.logs') }}" class="{{ 'active' if request.endpoint == 'admin.logs' }}">📋 System Logs</a>
+            <a href="{{ url_for('admin.analytics') }}" class="{{ 'active' if request.endpoint == 'admin.analytics' }}">📈 System Analytics</a>
+            <a href="{{ url_for('admin.database') }}" class="{{ 'active' if request.endpoint == 'admin.database' }}">🗄️ Database</a>
+        </nav>
+
+        <div style="margin-top: auto;">
+            <a href="{{ url_for('admin.logout') }}" class="btn btn-ghost" style="width: 100%;">Sign Out</a>
+        </div>
+    </aside>
+
+    <main class="admin-main">
+        <button data-nav-toggle class="btn btn-ghost admin-mobile-toggle">☰ Menu</button>
+        {% block admin_content %}{% endblock %}
+    </main>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{{ super() }}
+{% block admin_extra_js %}{% endblock %}
+{% endblock %}

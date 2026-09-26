@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Create Your Account — Minddora AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div class="auth-page">
+    <!-- <div class="glass-card auth-card neon-border glow-blue">
+        <div class="auth-header"> -->
+    <div class="glass-card auth-card neon-border glow-blue">
+        <a href="{{ url_for('landing.index') }}" class="auth-back-arrow" aria-label="Back to home">←</a>
+        <div class="auth-header">
+            <!-- <a href="{{ url_for('landing.index') }}" class="auth-logo"> -->
+                <a href="{{ url_for('admin.login') }}" class="auth-logo"></a>
+                Minddora<span class="text-neon">AI</span>
+            </a>
+            <h2>Create Your Account</h2>
+            <p>Start chatting with your notes in minutes.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <label for="full_name">Full Name</label>
+                {{ form.full_name(class="glass-input" + (" input-error" if form.full_name.errors else ""), id="full_name", placeholder="Dhruvil_Dave") }}
+                {% for error in form.full_name.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                {{ form.email(class="glass-input" + (" input-error" if form.email.errors else ""), id="email", placeholder="dhruvil@example.com") }}
+                {% for error in form.email.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="At least 8 characters") }}
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+                <div class="password-strength-meter" id="password-strength-meter"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                {{ form.confirm_password(class="glass-input" + (" input-error" if form.confirm_password.errors else ""), id="confirm_password", placeholder="Re-enter your password") }}
+                {% for error in form.confirm_password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div> -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-wrapper">
+                    {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="At least 8 characters") }}
+                    <button type="button" class="password-toggle-btn" data-target="password" aria-label="Show password">👁</button>
+                </div>
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+                <div class="password-strength-meter" id="password-strength-meter"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <div class="password-input-wrapper">
+                    {{ form.confirm_password(class="glass-input" + (" input-error" if form.confirm_password.errors else ""), id="confirm_password", placeholder="Re-enter your password") }}
+                    <button type="button" class="password-toggle-btn" data-target="confirm_password" aria-label="Show password">👁</button>
+                </div>
+                {% for error in form.confirm_password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-group form-checkbox-group">
+                {{ form.agree_to_terms(id="agree_to_terms") }}
+                <label for="agree_to_terms">
+                    I agree to the
+                    <a href="{{ url_for('landing.terms') }}" target="_blank" class="terms-link">Terms of Service</a>
+                    and
+                    <a href="{{ url_for('landing.privacy') }}" target="_blank" class="terms-link">Privacy Policy</a>
+                </label>
+                {% for error in form.agree_to_terms.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-neon btn-large auth-submit-btn") }}
+        </form>
+
+        <p class="auth-footer-text">
+            Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

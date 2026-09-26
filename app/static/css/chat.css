@@ -1,0 +1,386 @@
+/* ==========================================================================
+   chat.css
+   Styles for the Upload Notes, My Documents, Document Viewer, Chat, and
+   Search Notes pages. Depends on tokens/components from base.css and
+   glassmorphism.css.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Upload Dropzone
+   -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Upload Dropzone
+   -------------------------------------------------------------------------- */
+.upload-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    border: 2px dashed var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.02);
+    padding: var(--space-2xl) var(--space-lg);
+    min-height: 220px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.upload-dropzone:hover {
+    border-color: var(--color-accent-cyan);
+    background: rgba(34, 211, 238, 0.05);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-cyan);
+}
+
+.upload-dropzone.dropzone-active {
+    border-color: var(--color-accent-blue);
+    background: rgba(59, 130, 246, 0.08);
+    box-shadow: var(--glow-blue);
+    transform: scale(1.01);
+}
+
+.upload-dropzone-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-accent-gradient);
+    font-size: 1.8rem;
+    margin-bottom: var(--space-sm);
+    box-shadow: var(--glow-blue);
+}   
+
+.upload-dropzone p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+}
+
+.upload-dropzone p strong {
+    color: var(--color-accent-cyan);
+}
+
+.upload-hint {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+}
+
+.upload-progress-container {
+    margin-top: var(--space-lg);
+}
+
+.upload-progress-bar-track {
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.upload-progress-bar-fill {
+    height: 100%;
+    background: var(--color-accent-gradient);
+    transition: width 0.3s ease;
+}
+
+#upload-status-text {
+    font-size: 0.85rem;
+    margin-top: var(--space-xs);
+}
+
+/* --------------------------------------------------------------------------
+   My Documents Grid
+   -------------------------------------------------------------------------- */
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-md);
+}
+
+.document-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.document-card-icon {
+    font-size: 1.8rem;
+}
+
+.document-card-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.document-card-meta {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+}
+
+/* .document-card-actions {
+    display: flex;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+} */
+ .document-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.document-card-actions .btn {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Chat Interface
+   -------------------------------------------------------------------------- */
+.chat-page-layout {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 4rem);
+}
+
+.chat-messages-container {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+}
+
+.chat-message-row {
+    display: flex;
+    max-width: 75%;
+}
+
+.chat-message-row.role-user {
+    align-self: flex-end;
+    justify-content: flex-end;
+}
+
+.chat-message-row.role-assistant {
+    align-self: flex-start;
+}
+
+.chat-message-bubble {
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-md);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+.role-user .chat-message-bubble {
+    background: var(--color-accent-gradient);
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+}
+
+.role-assistant .chat-message-bubble {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom-left-radius: 4px;
+}
+
+.chat-message-bubble code {
+    font-family: var(--font-family-mono);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.chat-message-bubble pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    margin: var(--space-sm) 0;
+}
+
+.chat-confidence-badge {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    padding: 0.15rem 0.6rem;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.chat-confidence-badge.confidence-high { background: rgba(34,197,94,0.15); color: var(--color-success); }
+.chat-confidence-badge.confidence-medium { background: rgba(245,158,11,0.15); color: var(--color-warning); }
+.chat-confidence-badge.confidence-low { background: rgba(239,68,68,0.15); color: var(--color-error); }
+
+.chat-citations-list {
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.chat-citation-chip {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.72rem;
+    border-radius: var(--radius-full);
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--color-accent-cyan);
+    border: 1px solid rgba(34, 211, 238, 0.25);
+    cursor: pointer;
+}
+
+.chat-message-actions {
+    display: flex;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.chat-message-actions button {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.chat-message-actions button:hover {
+    color: var(--color-accent-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   Typing Indicator
+   -------------------------------------------------------------------------- */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 0.9rem 1.1rem;
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent-cyan);
+    animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.15s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typing-bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Chat Input Bar
+   -------------------------------------------------------------------------- */
+.chat-input-bar {
+    display: flex;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--glass-border);
+}
+
+.chat-input-bar textarea {
+    flex: 1;
+    resize: none;
+    max-height: 140px;
+}
+
+/* --------------------------------------------------------------------------
+   Search Notes Page
+   -------------------------------------------------------------------------- */
+.search-bar-row {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.search-mode-toggle {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.search-mode-toggle button {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.search-mode-toggle button.active {
+    background: var(--color-accent-gradient);
+    color: #fff;
+    border-color: transparent;
+}
+
+.search-result-card {
+    margin-bottom: var(--space-md);
+}
+
+.search-result-score {
+    font-size: 0.75rem;
+    color: var(--color-accent-cyan);
+    float: right;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .chat-message-row {
+        max-width: 90%;
+    }
+
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   AI Mode Badge (Chat page header)
+   -------------------------------------------------------------------------- */
+.ai-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ai-mode-badge:hover {
+    transform: translateY(-1px);
+}
+
+.ai-mode-badge-local {
+    background: rgba(148, 163, 184, 0.12);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--glass-border);
+}
+
+.ai-mode-badge-gemini {
+    background: var(--color-accent-gradient);
+    color: #ffffff;
+    box-shadow: var(--glow-blue);
+}

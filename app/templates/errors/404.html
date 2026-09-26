@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found — Minddora AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">{% endblock %}
+
+{% block content %}
+<div class="auth-page" style="text-align: center;">
+    <div>
+        <h1 class="hero-title text-neon" style="font-size: 6rem;">404</h1>
+        <h2 class="mt-lg">This page drifted out of orbit.</h2>
+        <p class="hero-subtitle mt-lg" style="margin: var(--space-lg) auto;">
+            The page you're looking for doesn't exist or may have been moved.
+        </p>
+        
+         <a href="{{ url_for('admin.login') }}" class="btn btn-neon btn-large mt-lg">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

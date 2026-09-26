@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login — Minddora AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<div class="auth-page admin-login-page">
+    <!-- <div class="glass-card auth-card neon-border admin-login-card">
+        <div class="auth-header"> -->
+    <div class="glass-card auth-card neon-border admin-login-card">
+        <a href="{{ url_for('landing.index') }}" class="auth-back-arrow" aria-label="Back to home">←</a>
+        <div class="auth-header">
+            <span class="admin-badge">ADMIN PANEL</span>
+            <h2>Minddora<span class="text-neon">AI</span></h2>
+            <p>Authorized personnel only.</p>
+        </div>
+
+        <form method="POST" action="{{ url_for('admin.login') }}" class="auth-form" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <label for="email">Admin Email</label>
+                {{ form.email(class="glass-input" + (" input-error" if form.email.errors else ""), id="email", placeholder="admin@minddora.ai") }}
+                {% for error in form.email.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-input-wrapper">
+                    {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="Enter your password") }}
+                    <button type="button" class="password-toggle-btn" data-target="password" aria-label="Show password">👁</button>
+                </div>
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password(class="glass-input" + (" input-error" if form.password.errors else ""), id="password", placeholder="Enter your password") }}
+                {% for error in form.password.errors %}
+                    <span class="field-error-message">{{ error }}</span>
+                {% endfor %}
+            </div> -->
+
+            {{ form.submit(class="btn btn-neon btn-large auth-submit-btn") }}
+        </form>
+    </div>
+</div>
+{% endblock %}
